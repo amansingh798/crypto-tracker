@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Tracker — Live Prices</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo">₿</span>
+      <h1>Crypto Tracker</h1>
+    </div>
+
+    <div class="controls">
+      <input id="searchInput" class="search" type="search" placeholder="Search coin (e.g., bitcoin)" aria-label="Search coin">
+      <select id="currencySelect" aria-label="Select currency">
+        <option value="usd" selected>USD</option>
+        <option value="inr">INR</option>
+        <option value="eur">EUR</option>
+      </select>
+      <button id="toggleWatch" class="btn-outline" aria-pressed="false" title="Show watchlist only">★ Watchlist</button>
+      <button id="refreshBtn" class="btn" title="Refresh now">↻ Refresh</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="table-wrap" aria-live="polite">
+      <table class="table" id="coinsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Coin</th>
+            <th class="right">Price</th>
+            <th class="right">24h</th>
+            <th class="right">Market Cap</th>
+            <th class="center">★</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+      <div id="status" class="status">Loading coins…</div>
+    </section>
+  </main>
+
+  <!-- Modal for 24h chart -->
+  <dialog id="chartModal" class="modal">
+    <form method="dialog" class="modal-content">
+      <header class="modal-header">
+        <div>
+          <h2 id="modalTitle">Coin</h2>
+          <p id="modalSubtitle" class="subtle"></p>
+        </div>
+        <button id="closeModal" class="icon-btn" aria-label="Close">✕</button>
+      </header>
+      <canvas id="priceChart" height="220"></canvas>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    <small>Data: CoinGecko (public API). Updates every 60s.</small>
+  </footer>
+</body>
+</html>
